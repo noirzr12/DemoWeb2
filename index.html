@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#e6e2dd",
+                    "secondary": "#506443",
+                    "on-secondary-fixed-variant": "#394c2d",
+                    "tertiary": "#191916",
+                    "surface-variant": "#e4e2e1",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary-fixed-dim": "#b7cea5",
+                    "on-background": "#1b1c1c",
+                    "on-tertiary-fixed-variant": "#484743",
+                    "surface-bright": "#fcf9f8",
+                    "primary-container": "#3e2723",
+                    "inverse-primary": "#e3beb8",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f3f0ef",
+                    "secondary-container": "#d0e7bd",
+                    "outline-variant": "#d3c3c0",
+                    "on-surface-variant": "#504442",
+                    "tertiary-container": "#2e2d2a",
+                    "surface": "#fcf9f8",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1b1c1c",
+                    "inverse-surface": "#303030",
+                    "on-primary-fixed-variant": "#5b403c",
+                    "primary": "#271310",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#827472",
+                    "surface-container-highest": "#e4e2e1",
+                    "primary-fixed": "#ffdad4",
+                    "background": "#fcf9f8",
+                    "on-primary-container": "#ae8d87",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#1c1c19",
+                    "on-tertiary-container": "#979490",
+                    "secondary-fixed": "#d3eac0",
+                    "surface-container": "#f0eded",
+                    "surface-dim": "#dcd9d9",
+                    "on-primary-fixed": "#2b1613",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#eae7e7",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#745853",
+                    "on-secondary-fixed": "#0f2006",
+                    "tertiary-fixed-dim": "#c9c6c1",
+                    "primary-fixed-dim": "#e3beb8",
+                    "on-secondary-container": "#546847",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "max-width": "1280px",
+                    "margin-desktop": "80px",
+                    "section-gap-mobile": "64px",
+                    "section-gap-desktop": "120px",
+                    "base": "8px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Epilogue"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "label-sm": ["Epilogue"],
+                    "headline-lg": ["Epilogue"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "headline-lg-mobile": ["Epilogue"],
+                    "display-lg": ["Epilogue"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #fcf9f8;
+            color: #1b1c1c;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+
+        /* Fixed Background Parallax Effect */
+        .parallax-hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .parallax-bg-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            will-change: transform;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(39,19,16,0.5), rgba(39,19,16,0.3));
+            z-index: 1;
+        }
+        .hero-content-layer {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Main Content "Cover" Effect */
+        .main-content-scroll {
+            position: relative;
+            z-index: 10;
+            background-color: #fcf9f8;
+            margin-top: 0;
+            box-shadow: 0 -20px 50px rgba(0,0,0,0.1);
+            border-radius: 40px 40px 0 0;
+        }
+        @media (min-width: 768px) {
+            .main-content-scroll {
+                border-radius: 80px 80px 0 0;
+            }
+        }
+    </style>
+</head>
+<body class="selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopAppBar -->
+<nav class="bg-surface/90 backdrop-blur-md text-primary w-full top-0 sticky z-[60] border-b border-outline-variant/30 h-20">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-base max-w-max-width mx-auto h-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary scale-95 cursor-pointer" data-icon="menu">menu</span>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Kong H Iddin</h1>
+</div>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#menu">Menu Utama</a>
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#galeri">Galeri Foto</a>
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors duration-300" href="#reservasi">Tentang Kami</a>
+</div>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest px-6 py-3 rounded-full hover:opacity-90 transition-opacity" onclick="window.open('https://wa.me/6281280018082', '_blank')">
+            Reservasi
+        </button>
+</div>
+</nav>
+<!-- Parallax Hero Section -->
+<header class="parallax-hero">
+<div class="parallax-bg-fixed" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC-PIINu7sr5WvOcb8_-EpYPmjMWeT3BTEL283zNt6V0qjNRFHFibd3W6hZNcYziWCunGulPnzXZiUGWJmsOJA5UwpWunWrEeKiqatsXjTbJHQzhvYFx4qGjnR0pwUsLXDBeqKEQ63r8hbpaMPmKBhVJFh5KH519_fn3uiaHFBO9RIcesoYdh3zIDcjB0azDmBCGFcdbWPEUvRTYw0cs7VmHBZMZKyaGVfZ5iZNg7yiFSjqm5kqpiLYGVOs8hSbrvSllnqkKPQ19og");'>
+<div class="hero-overlay"></div>
+</div>
+<div class="hero-content-layer px-margin-mobile max-w-3xl">
+<p class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-[0.3em] mb-6 drop-shadow-md reveal active">Warisan Rasa Tradisional</p>
+<h2 class="font-display-lg text-display-lg text-white mb-8 drop-shadow-lg reveal active delay-100">Nikmati Kehangatan Kuliner Nusantara di Saung Lesehan</h2>
+<div class="flex justify-center gap-base reveal active delay-200">
+<span class="h-[1px] w-12 bg-white/50 self-center"></span>
+<span class="material-symbols-outlined text-white" data-icon="restaurant">restaurant</span>
+<span class="h-[1px] w-12 bg-white/50 self-center"></span>
+</div>
+</div>
+</header>
+<!-- Main Content Wrapper -->
+<main class="main-content-scroll">
+<!-- Welcome Section -->
+<section class="py-section-gap-mobile md:py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto">
+<div class="grid md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1">
+<h3 class="font-headline-lg text-headline-lg text-primary mb-6 reveal">Otentisitas yang Terjaga Sejak Generasi Pertama</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 leading-relaxed reveal">
+                    Rumah Makan Kong H Iddin menghadirkan pengalaman bersantap lesehan yang sesungguhnya. Di balik setiap hidangan tersimpan resep rahasia keluarga yang telah diwariskan turun-temurun, diolah dengan bahan-bahan organik segar pilihan dari petani lokal.
+                </p>
+<div class="flex gap-gutter reveal">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-secondary">25+</span>
+<span class="font-label-sm text-label-sm uppercase opacity-60">Tahun Tradisi</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-secondary">40+</span>
+<span class="font-label-sm text-label-sm uppercase opacity-60">Menu Pilihan</span>
+</div>
+</div>
+</div>
+<div class="order-1 md:order-2 rounded-xl overflow-hidden shadow-sm reveal">
+<img alt="Interior" class="w-full h-[400px] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjA0KYHOinC_w2OIJpX7fCJT8YbbLUYJGzOuU-gWULCXiKKxFbDO_Q5v_mMIJhgpy6QobxbMiBWd8ipcU2qz4xr_Ow2sf2tc48isOXR2odHtgJ7Auqs_R34OT-q1tqEGgco-BXuAQv4ALpab39Ux0qMcdChBiMZuWxHEB5ufkEizFVEIMLNN7h7NT8__DAHFTI6KMwK9LHWzM84t4ihHjN37UV6_v3y08zOKFMKhQ3MVU3yZU-smDIXnQLnr3T-TsauaMVE6IHmrg"/>
+</div>
+</div>
+</section>
+<!-- Menu Section -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop bg-surface-container-low" id="menu">
+<div class="max-w-max-width mx-auto">
+<div class="text-center mb-16">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest reveal">Pilihan Terbaik Kami</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mt-2 reveal">Daftar Rasa Favorit</h2>
+<div class="w-24 h-[1px] bg-outline-variant/50 mx-auto mt-6"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Menu Item 1 -->
+<div class="group cursor-pointer reveal">
+<div class="relative aspect-[4/5] overflow-hidden rounded-lg mb-6 shadow-sm">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJoQnYl6I15PejIUE774brOqfUdFhtNPP7ex3Jb_gc9LxM5DUCf0-B3Vzzv1AqVzq1s_V1vLQ-x7PXcIgcMY1H5LuQ2Yo-W8zPvZE79EUj6j5LpAEnfJ61gOaVpJC3GmEQpiJsSDmqDlqMzK1wHMl24SNmmo5gCaSWlCoJ6Po0u3oKkaJHM7p1Bf6VrhtZs-Ick16MzemWXIq2e5c8IyoT3_leAT6wY7mzeREhyyv6ZDdUYnMRdUOxOOSpmwm7r0UN5zsmS97qq6E"/>
+<div class="absolute top-4 left-4">
+<span class="bg-secondary/10 text-secondary text-[10px] font-bold uppercase tracking-tighter px-3 py-1 rounded-full backdrop-blur-sm">Andalan</span>
+</div>
+</div>
+<h4 class="font-headline-md text-headline-md text-primary mb-1">Gurame Bakar Madu</h4>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-70">Ikan gurame segar bakar bumbu rempah madu khas Betawi.</p>
+<div class="mt-4 flex items-center justify-between">
+<span class="font-body-lg text-body-lg font-bold text-primary">Rp 85.000</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+<!-- Menu Item 2 -->
+<div class="group cursor-pointer reveal delay-100">
+<div class="relative aspect-[4/5] overflow-hidden rounded-lg mb-6 shadow-sm">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfZGIiI9nFduGGsG_bW_RgnUy8cg7gJhb59xWCCCf5NBDLJFMGRDAVeZxmccizU9moBE0mlb7D6r2Uo74TEe1yiVenZ39MzxUnKNx2RQEFcp9KLDEnXbQPzHk0Xc618TVU2XWlLvh2Sx1t6PVJo68f8FzR3cuCEKAvniz9yOCkBPdA_phzyv32JpW7pqDp4TdKUXVJcta8ZY_MgNr1zDQk2CPQV35tMcnXI0x-Tf6NHV2yRj1q8vNEFTsTY1xBebiuWfrBPiweo9o"/>
+<div class="absolute top-4 left-4">
+<span class="bg-secondary/10 text-secondary text-[10px] font-bold uppercase tracking-tighter px-3 py-1 rounded-full backdrop-blur-sm">Pedas</span>
+</div>
+</div>
+<h4 class="font-headline-md text-headline-md text-primary mb-1">Sate Maranggi Spesial</h4>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-70">Daging sapi pilihan dengan bumbu meresap sempurna.</p>
+<div class="mt-4 flex items-center justify-between">
+<span class="font-body-lg text-body-lg font-bold text-primary">Rp 62.000</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+<!-- Menu Item 3 -->
+<div class="group cursor-pointer reveal delay-200">
+<div class="relative aspect-[4/5] overflow-hidden rounded-lg mb-6 shadow-sm">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0f3LUm8QVlt9xWHqBuXfPfK6nAVmEgKkibHWxlf8jDa-7LvZU_gWkL_PKuUg3JFXe3qF0IqP3QB_1Nv81Vgbf8nX-wksGv34q5BQLfdLQDhiiB1knArgp1YmmckDbL_ynSinggLLfaUKMjO0gYO1U7PrrOPfCNwBl-5dhdgUPMKEmdbEWWA-Q1plAhRHIhDlxljK3NbGuVhJEqcNUAy9RKPQ7T7I6vYVr7GiovCF6Y2xhQU5y_XuPlnIoSOLlO0LRakpccdrXyxg"/>
+</div>
+<h4 class="font-headline-md text-headline-md text-primary mb-1">Ayam Goreng Lengkuas</h4>
+<p class="font-body-md text-body-md text-on-surface-variant opacity-70">Ayam kampung empuk dengan taburan serundeng lengkuas.</p>
+<div class="mt-4 flex items-center justify-between">
+<span class="font-body-lg text-body-lg font-bold text-primary">Rp 45.000</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Galeri Foto Section -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop" id="galeri">
+<div class="max-w-max-width mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest reveal">Suasana Kami</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mt-2 reveal">Harmoni Ruang &amp; Rasa</h2>
+</div>
+<p class="max-w-md font-body-md text-on-surface-variant opacity-80 reveal">
+                    Setiap sudut restoran kami dirancang untuk memberikan ketenangan privasi sambil menikmati hidangan terbaik.
+                </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4 h-[600px]">
+<div class="col-span-2 row-span-2 rounded-xl overflow-hidden shadow-sm group reveal">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfjiv-Z6thLFM9r9OsbQ1ioEZyHYBSnRy2jYgDbxuKx_6-Trtz3ITYe_9Xg3LxYvI6E0GjmMHWlkqNhRavLft2tG0EETkT-cFilKqCPnxOfQrrcrydYv0llLgakQPrFCFYb0cRxoMt2C4hseI_fhUa_ncWvQv-_oPzhn3AK6o40anzrCRGP_QWmyQXoF-DtMXBUDCrS-1j2d5doyGM8cEI9CPiLOJ_IQSJwu7HhtAEcY64KwVitGWoqVWkeTvqZxePMuTXS8TDRC0"/>
+</div>
+<div class="col-span-1 row-span-1 rounded-xl overflow-hidden shadow-sm group reveal">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWyo9u-1LQZrk7dYawr9KqmqLq7uiuKXUTdSlwmr22Iq1Bl5I6PzBEj4tvJhcLYGtoiv2__Cgi4ryyYzb5rmPqENlpQTFpmfNQedQ_eXFuLYRoeZYjXX74gbnj25CmYgWGnBtYKTVjOZH_YSOQSf4JAXuGo4j52LlemKgZGz_TGhXyR9zaqPBlay23NIu3DqXErCy8PPShMIKQK7wMwjyh6iz4RG2fYaX-m0opUnuP8rSEV8AYOXnP7PcPn_tAjHp76UN0BnQ--Lk"/>
+</div>
+<div class="col-span-1 row-span-2 rounded-xl overflow-hidden shadow-sm group reveal">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqkyIdqJVhiMKxWvLUsIq9VtcC0h0w6SH3N--RMtAdtANOaUBslsfF7i4OEmkuGcOcwbwCbbL1UCOQkEIBfBGGxr-X6COUpowKfCOCBj30XsxN6ECEFsNGzGjGxw2CImep11ImwD6L0oakl2sEQEVtAYabkdZl3Lu7JEnay_Rvv-gKpXqpF6-JDVRZTXT-EMh8A851E4v4fy0Flj4iQVYg6xo2ZXQektHAyRw8OPoanLOrwD6ejqiAswC9hYS2KtZDtFQKnyivsfo"/>
+</div>
+<div class="col-span-1 row-span-1 rounded-xl overflow-hidden shadow-sm group reveal">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCglOKa_ivWjLd1QbLPyHaz5vYDncOqA8aRw2uSsiYALn-ffBYFVjFWQrEhNXdcZ5FJVRgyr14mRW5j5JSDqFwgCU6hb3feSiaMZPwL6AyuN6dsSf-l9XuxB8SfxkFind6TgFaon5U3ZJlTHUrAiY1X4QnNGa_lYEGgCCgpAWB0abNvCI69mIklvzFSVQfjy_Uuuhebbj534i9kEzq5kB6AlOGDT_y478w8pyClT0dYB7KyL3HpNVrrzOYSeWmafOpZ1kJ0jpJGuyw"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Reservation Section -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-margin-mobile md:px-margin-desktop bg-surface-container-highest" id="reservasi">
+<div class="max-w-max-width mx-auto bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-sm">
+<div class="md:w-1/2 p-8 md:p-16">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6 reveal">Pesan Tempat Anda</h2>
+<p class="font-body-md text-on-surface-variant mb-12 reveal">Hubungi kami langsung melalui WhatsApp atau telepon untuk melakukan reservasi tempat dan pesanan khusus. Kami siap melayani Anda.</p>
+<div class="flex flex-col gap-4 mt-8 reveal">
+<a class="w-full bg-secondary text-on-secondary py-4 rounded-full font-label-sm text-label-sm uppercase tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-3 shadow-md" href="https://wa.me/6281280018082" target="_blank">
+<span class="material-symbols-outlined text-[20px]" data-icon="chat">chat</span>
+                        Chat via WhatsApp
+                    </a>
+<a class="w-full border-2 border-primary text-primary py-4 rounded-full font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all flex items-center justify-center gap-3" href="tel:081280018082">
+<span class="material-symbols-outlined text-[20px]" data-icon="call">call</span>
+                        Telepon Sekarang
+                    </a>
+</div>
+</div>
+<div class="md:w-1/2 bg-primary-container p-8 md:p-16 flex flex-col justify-between text-on-primary-fixed">
+<div>
+<h3 class="font-headline-md text-headline-md mb-8 reveal">Hubungi Kami</h3>
+<div class="space-y-6">
+<div class="flex items-start gap-4 reveal">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="location_on">location_on</span>
+<div>
+<p class="font-bold">Alamat Utama</p>
+<p class="opacity-80">Jl. Pangeran Jayakarta No.5, Harapan Mulya, Medan Satria, Bekasi</p>
+</div>
+</div>
+<div class="flex items-start gap-4 reveal">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="schedule">schedule</span>
+<div>
+<p class="font-bold">Jam Operasional</p>
+<p class="opacity-80">Senin - Minggu: 10:00 - 22:00</p>
+</div>
+</div>
+<div class="flex items-start gap-4 reveal">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="phone">phone</span>
+<div>
+<p class="font-bold">Telepon / WA</p>
+<p class="opacity-80">0812-8001-8082</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 rounded-lg overflow-hidden h-[200px] grayscale contrast-125 opacity-70 reveal">
+<img alt="Map Location" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsM1MDgDvLWgzHOANUOkiCACuC8lv9BOVRKUJcmO3Gn23IoRcaiICk-oo7CIYbg2R7gSHrgKtiPscabM4OAjwD6ZjMvo8GQwm5tKOeVTtrkTA8mHHhGfZzx8q6Q6bDz2ohb55rd70Rf-gPc7zFvZA9UqbMQkdupmgiTklMx-lt_wWuanW0Nvo6t9Wd3WZi_LWR7d2zRfftVjLhImdRec8UtriSqOLoDNh0Gz1g2LgfUZrT0dXoLXu1bnDqRebeKKkNckjBA770254"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-low text-primary py-16 px-margin-mobile md:px-margin-desktop border-t border-outline-variant/20">
+<div class="max-w-max-width mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="flex flex-col gap-6">
+<h2 class="font-headline-md text-headline-md text-primary tracking-tight">Kong H Iddin</h2>
+<p class="font-body-md text-on-surface-variant max-w-sm">Menjaga warisan tradisi kuliner nusantara dengan bahan organik terbaik dan keramahan khas Indonesia.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined p-2 border border-outline-variant rounded-full cursor-pointer hover:bg-primary hover:text-on-primary transition-all" data-icon="facebook">Notebook</span>
+<span class="material-symbols-outlined p-2 border border-outline-variant rounded-full cursor-pointer hover:bg-primary hover:text-on-primary transition-all" data-icon="camera">camera</span>
+<span class="material-symbols-outlined p-2 border border-outline-variant rounded-full cursor-pointer hover:bg-primary hover:text-on-primary transition-all" data-icon="share">share</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="flex flex-col gap-4">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">Tautan Cepat</h4>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#menu">Menu Utama</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#galeri">Galeri Foto</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="https://wa.me/6281280018082" target="_blank">Reservasi</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">Bantuan</h4>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Kebijakan Privasi</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Syarat &amp; Ketentuan</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Lokasi Cabang</a>
+</div>
+</div>
+</div>
+<div class="max-w-max-width mx-auto mt-16 pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-md text-body-md opacity-60">© 2024 Rumah Makan Lesehan Kong H Iddin. Warisan Tradisi di Setiap Hidangan.</p>
+<div class="flex items-center gap-1 opacity-60">
+<span class="font-label-sm text-label-sm">MADE WITH</span>
+<span class="material-symbols-outlined text-[14px] text-error" data-icon="favorite" style='font-variation-settings: "FILL" 1;'>favorite</span>
+<span class="font-label-sm text-label-sm uppercase">Heritage Culture</span>
+</div>
+</div>
+</footer>
+</main>
+<script>
+    // Intersection Observer for Scroll Reveals
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax background scroll effect
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxBg = document.querySelector('.parallax-bg-fixed');
+        if (parallaxBg) {
+            // Slight slow movement for added depth
+            parallaxBg.style.transform = `translateY(${scrolled * 0.15}px)`;
+        }
+    });
+</script>
+</body></html>
